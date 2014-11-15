@@ -1,9 +1,13 @@
 <?php
 $base_dir="/root/html/hack/";
-echo $_POST["name"];
-$url = $base_dir + $_POST["name"];
-$fso=fopen($url, "w");
-fwrite($fso, $_POST["context"]);
-$fnameHandler = fopen($base_dir."name.txt", "w");
+$url = $_POST["name"];
+echo $url;
+$fso=fopen($url, "w") or die("fxxk\n");
+$context = substr($_POST["context"], 59, strlen($_POST["context"]) - 59 - 6);
+echo $context;
+fwrite($fso, $context);
+fclose($fso);
+$fnameHandler = fopen("name.txt", "w") or die("hehe");
 fwrite($fnameHandler, $_POST["name"]);
+fclose($fnameHandler);
 ?>
